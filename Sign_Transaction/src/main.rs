@@ -1,9 +1,19 @@
 
+mod definition;
 mod utils;
 
 fn main() {
-    utils::usage::usage();
 
-    let str = String::from("Invalid to Address");
-    utils::show::show_error(&str);
+    let parameters = match utils::args::parse_args() {
+        Ok(v) => v,
+        Err(e) => {
+            utils::show::show_error(&e);
+            return;
+        }
+    };
+
+    if parameters.contains_key("help") {
+        utils::usage::usage();
+        return;
+    }
 }
