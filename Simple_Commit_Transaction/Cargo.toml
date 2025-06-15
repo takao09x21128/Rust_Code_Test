@@ -1,0 +1,10 @@
+[package]
+name = "Simple_Commit_Transaction"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ethers = { version = "2.0.14", features = [ "rustls"]}
+tokio = { version = "1", features = ["full"]}
+eyre = "0.6"
+hex = "0.4"
