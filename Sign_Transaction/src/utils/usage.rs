@@ -12,6 +12,7 @@ Options:
     --gas_price <PRICE> 基本料金、OCT文字列、_可、ex 1234567, 123_456_789
     --nonce <NONCE>     ナンス、OCT文字列、_可、ex 1234567, 123_456_789
     --chain <ID>        ネットワークの識別ID、OCT文字列、_可、ex 1234567, 123_456_789
+    --data <MESSAGE>    送金に添付メッセージ
     --pk <PRIVATEKEY>   送金元のキー
 
     JSON fileに使われる項目リスト：
@@ -21,6 +22,7 @@ Options:
         'gas_price': '<GAS_PRICE>',
         'nonce': '<NONCE>',
         'chain': '<ID>',
+        'data': '<MESSAGE>',
     
     各項目の意味について、 --xxxにご参照
     前記の項目以外を無視される
@@ -35,5 +37,7 @@ Options:
     例：
         SignTransaction --to --nonce 1000
         --toが無視される
+    送金に必要項目は、
+        to, value, gas, gas_price, nonce, chain
 ");
 }
