@@ -30,10 +30,12 @@ impl SignatureStruct {
             return Err("chain id MUST be set.".to_string());
         };
 
+        println!("{}", chain_id);
+
         let wallet : LocalWallet = if let Some(pk) = map.get("pk") {
             let w = pk
-                        .parse::<LocalWallet>()
-                        .map_err(|_| "invalid private key".to_string())?;
+                    .parse::<LocalWallet>()
+                    .map_err(|_| "invalid private key".to_string())?;
             w.with_chain_id(chain_id)
         } else {
             return Err("sender's private key MUST be set.".to_string());
@@ -48,36 +50,36 @@ impl SignatureStruct {
         };
 
         let value : U256 = if let Some(value_str) = map.get("value") {
-            value_str
-                .replace("_", "")
-                .parse::<U256>()
-                .map_err(|_| "invalid value".to_string())?
+            let cleaned = value_str.replace("_", "");
+
+            U256::from_dec_str(&cleaned)
+                    .map_err(|_| "invalid value".to_string())?
         } else {
             return Err("ammount MUST be set.".to_string())
         };
 
         let gas : U256  = if let Some(gas_str) = map.get("gas") {
-            gas_str
-                .replace("_", "")
-                .parse::<U256>()
+            let cleaned = gas_str.replace("_", "");
+
+            U256::from_dec_str(&cleaned)
                 .map_err(|_| "invalid gas value")?
         } else {
             return Err("GAS MUST be set.".to_string());
         };
 
         let gas_price : U256 = if let Some(gas_price_str) = map.get("gas_price") {
-            gas_price_str
-                .replace("_", "")
-                .parse::<U256>()
+            let cleaned = gas_price_str.replace("_", "");
+
+            U256::from_dec_str(&cleaned)
                 .map_err(|_| "invalid gas price.".to_string())?
         } else {
             return Err("GAS Price MUST be set.".to_string());
         };
 
         let nonce: U256 = if let Some(nonce_str) = map.get("nonce") {
-            nonce_str
-                .replace("_", "")
-                .parse::<U256>()
+            let cleaned = nonce_str.replace("_", "");
+
+            U256::from_dec_str(&cleaned)
                 .map_err(|_| "invalid nonce.".to_string())?
         } else {
             return Err("NONCE MUST be set.".to_string());
